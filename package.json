@@ -1,0 +1,15 @@
+{
+  "name": "blue-buggy",
+  "version": "1.0.0",
+  "description": "Phaser 3 game - Blue Buggy",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html --open"
+  },
+  "dependencies": {
+    "phaser": "^3.60.0"
+  },
+  "devDependencies": {
+    "parcel": "^2.9.3"
+  }
+}
