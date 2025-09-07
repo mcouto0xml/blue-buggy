@@ -29,7 +29,7 @@ class menuInicial extends Phaser.Scene {
     create() {
 
         // CAMERA 
-        this.soundtrack1 = this.sound.add('soundtrack1', { loop: true, volume: 0.1 });
+        this.soundtrack1 = this.sound.add('soundtrack1', { loop: true, volume: 0.03 });
         this.soundtrack1.play();
         this.cameras.main.fadeIn(1000);
 
@@ -89,6 +89,7 @@ class menuInicial extends Phaser.Scene {
                     this.time.addEvent({
                         delay: 1000, // Tempo em milissegundos (2 segundos)
                         callback: () => {
+                            this.soundtrack1.stop();
                             this.scene.start('FasePrincipal'); // Inicia a tela de configuração
                         }
                     })

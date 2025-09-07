@@ -74,8 +74,9 @@ class FasePrincipal extends Phaser.Scene {
 
 
 
+    this.carRideAudio = this.sound.add('carRide', { loop: true, volume: 0.5 });
+    this.radioAudio = this.sound.add('radio', { loop: true, volume: 0.2 });
 
-    // Adicionar áudios em loop
 
     this.carRideAudio.play();
 
