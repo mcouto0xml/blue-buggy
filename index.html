@@ -1,16 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Blue Buggy Game</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { margin: 0; background: #222; }
-    #game-container { width: 100vw; height: 100vh; }
+    @font-face {
+      font-family: 'ByteBounce';
+      src: url('assets/fontes/ByteBounce.ttf') format("truetype");
+    }
+
+    body {
+      background-color: rgb(255, 255, 255);
+      display: flex;
+      /* define o display como flex*/
+      justify-content: center;
+      /* justifica o conteúdo do body para o centro */
+      align-items: center;
+      /* alinha os itens para o centro*/
+      height: 100vh;
+      /* define a altura do corpo do site*/
+      margin: 0;
+      /* define a margem do site para 0 */
+    }
   </style>
-</head>
-<body>
-  <div id="game-container"></div>
+  <script src="./phaser.js"></script> <!------ adiciona o script do Phaser ------->
+  <script src="./scenes/menuInicial.js"></script>
+  <script src="./scenes/Gameplay.js"></script>
   <script src="./main.js"></script>
+</head>
+
+<body>
 </body>
+
 </html>

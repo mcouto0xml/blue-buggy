@@ -1,20 +1,20 @@
-import Phaser from 'phaser';
-import Cutscene from './scenes/Cutscene.js';
-import LoadingScreen from './scenes/LoadingScreen.js';
-import Gameplay from './scenes/Gameplay.js';
-import Ending from './scenes/Ending.js';
 
 const config = {
   type: Phaser.AUTO,
-  width: 960,
-  height: 540,
-  parent: 'game-container',
-  backgroundColor: '#222',
-  scene: [Cutscene, LoadingScreen, Gameplay, Ending],
+  width: 1280,
+  height: 720,
+  scene: [FasePrincipal],
+  pixelArt: true,
   physics: {
     default: 'arcade',
     arcade: { debug: false }
-  }
+  },
+  scale: {
+        mode: Phaser.Scale.FIT,  // Mantém a proporção e ajusta o jogo à tela sem cortar
+        width: 1280, // Largura fixa
+        height: 720, // Altura fixa
+        parent: 'game-container'  // Define um contêiner HTML específico
+    },
 };
 
 const game = new Phaser.Game(config);
