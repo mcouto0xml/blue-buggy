@@ -22,6 +22,10 @@ class FasePrincipal extends Phaser.Scene {
     this.load.image('P1_fundo', 'assets/Jogabilidade/P1_fundo.png')
 
     this.load.image('soco', 'assets/Jogabilidade/soco.png')
+
+    // Carregar áudios
+    this.load.audio('carRide', 'assets/audios/car-ride.mp3');
+    this.load.audio('radio', 'assets/audios/radio.mp3');
   }
 
   create() {
@@ -43,6 +47,12 @@ class FasePrincipal extends Phaser.Scene {
 
     // Flag se fusca está na tela
     this.fuscaNaTela = false;
+
+    // Adicionar áudios em loop
+  this.carRideAudio = this.sound.add('carRide', { loop: true, volume: 3 });
+  this.radioAudio = this.sound.add('radio', { loop: true, volume: 0.2 });
+    this.carRideAudio.play();
+    this.radioAudio.play();
     this.reacaoLiberada = false;
 
 
