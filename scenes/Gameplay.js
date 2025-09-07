@@ -106,8 +106,12 @@ class FasePrincipal extends Phaser.Scene {
 
 
     // Decide aleatoriamente se será fusca ou carro comum
-    let ehFusca = Phaser.Math.Between(0, 10) === 0; // 20% de chance
-    let tipo = ehFusca ? 'fuscaAzul' : 'carroVermelho';
+  let ehFusca = Phaser.Math.Between(0, 10) === 0; // 20% de chance
+  let tipo = ehFusca ? 'fuscaAzul' : 'carroVermelho';
+
+  // Cores para carros comuns
+  const coresCarros = [0xff0000, 0x00ff00, 0x0000ff, 0xffff00, 0xff00ff, 0x00ffff];
+  let corSorteada = Phaser.Math.RND.pick(coresCarros);
 
     let velocidades = [-500, -450, -400]
     let Y = [650, 675]
@@ -135,6 +139,8 @@ class FasePrincipal extends Phaser.Scene {
         }
       });
     } else {
+      // Aplica cor sorteada ao carro comum
+      carro.setTint(corSorteada);
       // Destruir quando sair da tela
       carro.once('update', () => {
         if (carro.x < -50) carro.destroy();
