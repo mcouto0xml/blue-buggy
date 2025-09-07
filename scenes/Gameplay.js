@@ -32,7 +32,7 @@ class FasePrincipal extends Phaser.Scene {
     this.load.image('fuscaAzul', 'assets/fusca.png');
     this.load.spritesheet("npc_one", "assets/sprites/vincente.png", { frameWidth: 56, frameHeight: 84 })
 
-    
+
     // Carregar Imagem dos Players
 
     this.load.image('P1', 'assets/Jogabilidade/P1.png')
@@ -76,9 +76,6 @@ class FasePrincipal extends Phaser.Scene {
 
 
     // Adicionar áudios em loop
-    this.carRideAudio = this.sound.add('carRide', { loop: true, volume: 0.5 });
-    this.radioAudio = this.sound.add('radio', { loop: true, volume: 0.2 });
-
 
     this.carRideAudio.play();
 
