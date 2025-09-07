@@ -8,14 +8,36 @@ class FasePrincipal extends Phaser.Scene {
   }
 
   preload() {
+
+
+    this.fundo = this.add.tileSprite(
+      this.cameras.main.width / 2,
+      this.cameras.main.height / 2,
+      this.cameras.main.width,
+      this.cameras.main.height,
+      'fundo' // chave da imagem carregada no preload
+    ).setDepth(0);
+
+    this.ruas = this.add.tileSprite(
+      this.cameras.main.width / 2,
+      this.cameras.main.height / 2,
+      this.cameras.main.width,
+      this.cameras.main.height,
+      'ruas' // chave da imagem carregada no preload
+    ).setDepth(2);
+
+
     // Carregar sprites dos carros
     this.load.image('carroVermelho', 'assets/Jogabilidade/carro1.png');
     this.load.image('fuscaAzul', 'assets/fusca.png');
+    this.load.spritesheet("npc_one", "assets/sprites/vincente.png", { frameWidth: 56, frameHeight: 84 })
 
+    
     // Carregar Imagem dos Players
 
-    this.load.image('P1', 'assets/Jogabilidade/Personagem1.png')
-    this.load.image('P2', 'assets/Jogabilidade/Personagem2.png')
+    this.load.image('P1', 'assets/Jogabilidade/P1.png')
+    this.load.image('P2', 'assets/Jogabilidade/P2.png')
+
 
     // Menu
 
@@ -33,14 +55,16 @@ class FasePrincipal extends Phaser.Scene {
     this.pontos = { j1: 0, j2: 0 };
 
 
-    // Barras
-    this.perso1_fundo = this.add.image(140, 60, 'P1_fundo').setScale(1)
 
-    this.perso1 = this.add.image(70, 53, 'P1').setScale(0.45)
-    this.textoPontoJ1 = this.add.text(180, 28, '0', { fontFamily: "ByteBounce", fontSize: '48px', fill: '#fff' });
-    this.textoPontoJ2 = this.add.text(1240, 28, '0', { fontSize: '48px', fill: '#fff' });
 
-    this.soco = this.add.image(145, 55, 'soco').setScale(0.08)
+    this.perso1 = this.add.image(70, 50, 'P1').setScale(0.45)
+    this.perso2 = this.add.image(1090, 50, 'P2').setScale(0.45)
+
+    this.textoPontoJ1 = this.add.text(160, 28, '0', { fontFamily: "ByteBounce", fontSize: '48px', fill: '#fff' });
+    this.textoPontoJ2 = this.add.text(1190, 28, '0', { fontFamily: "ByteBounce", fontSize: '48px', fill: '#fff' });
+
+    this.soco = this.add.image(135, 55, 'soco').setScale(0.1)
+    this.soco2 = this.add.image(1165, 55, 'soco').setScale(0.1)
     // Teclas para cada jogador
     this.teclaJ1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A); // Jogador 1 aperta "A"
     this.teclaJ2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L); // Jogador 2 aperta "L"
@@ -48,15 +72,27 @@ class FasePrincipal extends Phaser.Scene {
     // Flag se fusca está na tela
     this.fuscaNaTela = false;
 
+
+
+
     // Adicionar áudios em loop
-  this.carRideAudio = this.sound.add('carRide', { loop: true, volume: 3 });
-  this.radioAudio = this.sound.add('radio', { loop: true, volume: 0.2 });
+    this.carRideAudio = this.sound.add('carRide', { loop: true, volume: 0.5 });
+    this.radioAudio = this.sound.add('radio', { loop: true, volume: 0.2 });
+
+
     this.carRideAudio.play();
-    this.radioAudio.play();
+
+    this.time.addEvent({
+      delay: 20000, // Tempo em milissegundos (2 segundos)
+      callback: () => {
+        this.radioAudio.play(); // Inicia a tela de configuração
+      }
+    })
+    
     this.reacaoLiberada = false;
 
 
-    let SpawnVelo = [2000, 1500, 1300]
+    let SpawnVelo = [2000, 1500]
     let Svelo = Phaser.Math.RND.pick(SpawnVelo);
     // Spawn de carros continuamente
     this.time.addEvent({
@@ -74,15 +110,18 @@ class FasePrincipal extends Phaser.Scene {
     let ehFusca = Phaser.Math.Between(0, 10) === 0; // 20% de chance
     let tipo = ehFusca ? 'fuscaAzul' : 'carroVermelho';
 
-    let posicoes = [400, 600];
     let velocidades = [-500, -450, -400]
+    let Y = [650, 675]
 
     let velo = Phaser.Math.RND.pick(velocidades);
-    let posY = Phaser.Math.RND.pick(posicoes);
+    let PosY = Phaser.Math.RND.pick(Y);
 
-    let carro = this.add.sprite(1280, posY, tipo).setScale(0.5); // aparece à direita
+    let carro = this.add.sprite(1280, PosY, tipo).setScale(0.3).setDepth(20); // aparece à direita
     this.physics.add.existing(carro);
 
+    if (PosY == 675){
+      carro.setDepth(21)
+    }
     carro.body.setVelocityX(velo); // anda para esquerda
     if (ehFusca) {
       this.fuscaNaTela = true;
@@ -115,9 +154,8 @@ class FasePrincipal extends Phaser.Scene {
       }
     }
 
-    if (this.pontos.j1 == 5 || this.pontos.j2 == 5){
-
-    }
+    this.fundo.tilePositionX -= 2;
+    this.ruas.tilePositionX -= 6;
   }
 
   atribuiPonto(jogador) {

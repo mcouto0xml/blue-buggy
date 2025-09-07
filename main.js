@@ -3,7 +3,7 @@ const config = {
   type: Phaser.AUTO,
   width: 1280,
   height: 720,
-  scene: [FasePrincipal],
+  scene: [menuInicial, FasePrincipal],
   pixelArt: true,
   physics: {
     default: 'arcade',
