@@ -90,7 +90,7 @@ class menuInicial extends Phaser.Scene {
                         delay: 1000, // Tempo em milissegundos (2 segundos)
                         callback: () => {
                             this.soundtrack1.stop();
-                            this.scene.start('FasePrincipal'); // Inicia a tela de configuração
+                            this.scene.start('LoadingScreen'); // Inicia a tela de configuração
                         }
                     })
                 });

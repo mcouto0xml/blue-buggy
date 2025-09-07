@@ -51,12 +51,10 @@ class FasePrincipal extends Phaser.Scene {
   }
 
   create() {
+
+    this.cameras.main.fadeIn(1000);
     // Pontuação
     this.pontos = { j1: 0, j2: 0 };
-
-
-
-
     this.perso1 = this.add.image(70, 50, 'P1').setScale(0.45)
     this.perso2 = this.add.image(1090, 50, 'P2').setScale(0.45)
 
