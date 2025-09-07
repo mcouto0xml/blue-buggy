@@ -46,8 +46,9 @@ class FasePrincipal extends Phaser.Scene {
     this.load.image('soco', 'assets/Jogabilidade/soco.png')
 
     // Carregar áudios
-    this.load.audio('carRide', 'assets/audios/car-ride.mp3');
-    this.load.audio('radio', 'assets/audios/radio.mp3');
+  this.load.audio('carRide', 'assets/audios/car-ride.mp3');
+  this.load.audio('radio', 'assets/audios/radio.mp3');
+  this.load.audio('punch', 'assets/audios/punch.mp3');
   }
 
   create() {
@@ -72,16 +73,18 @@ class FasePrincipal extends Phaser.Scene {
 
 
 
-    this.carRideAudio = this.sound.add('carRide', { loop: true, volume: 0.5 });
-    this.radioAudio = this.sound.add('radio', { loop: true, volume: 0.2 });
+  this.carRideAudio = this.sound.add('carRide', { loop: true, volume: 0.5 });
+  this.radioAudio = this.sound.add('radio', { loop: true, volume: 0.2 });
+  this.punchAudio = this.sound.add('punch', { volume: 1 });
 
 
-    this.carRideAudio.play();
+  this.carRideAudio.play();
 
     this.time.addEvent({
       delay: 20000, // Tempo em milissegundos (2 segundos)
       callback: () => {
         this.radioAudio.play(); // Inicia a tela de configuração
+        // O áudio de fundo já está tocando junto
       }
     })
     
@@ -144,9 +147,11 @@ class FasePrincipal extends Phaser.Scene {
       if (Phaser.Input.Keyboard.JustDown(this.teclaJ1)) {
         this.pontos.j1++;
         this.atribuiPonto(1);
+        this.punchAudio.play();
       } else if (Phaser.Input.Keyboard.JustDown(this.teclaJ2)) {
         this.pontos.j2++;
         this.atribuiPonto(2);
+        this.punchAudio.play();
       }
     }
 

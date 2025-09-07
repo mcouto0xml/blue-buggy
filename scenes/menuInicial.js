@@ -24,12 +24,13 @@ class menuInicial extends Phaser.Scene {
         // Sons
 
         this.load.audio('soundtrack1', 'assets/audios/soundtrack1.mp3')
+        this.load.audio('radio', 'assets/audios/radio.mp3')
     }
 
     create() {
 
         // CAMERA 
-        this.soundtrack1 = this.sound.add('soundtrack1', { loop: true, volume: 0.03 });
+        this.soundtrack1 = this.sound.add('soundtrack1', { loop: true, volume: 1 });
         this.soundtrack1.play();
         this.cameras.main.fadeIn(1000);
 
@@ -90,7 +91,9 @@ class menuInicial extends Phaser.Scene {
                         delay: 1000, // Tempo em milissegundos (2 segundos)
                         callback: () => {
                             this.soundtrack1.stop();
-                            this.scene.start('LoadingScreen'); // Inicia a tela de configuração
+                                this.radio = this.sound.add('radio', { loop: true, volume: 1 });
+                                this.radio.play();
+                            this.scene.start('FasePrincipal'); // Inicia a tela de configuração
                         }
                     })
                 });
