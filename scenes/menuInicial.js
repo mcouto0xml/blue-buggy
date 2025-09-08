@@ -30,7 +30,7 @@ class menuInicial extends Phaser.Scene {
     create() {
 
         // CAMERA 
-        this.soundtrack1 = this.sound.add('soundtrack1', { loop: true, volume: 1 });
+        this.soundtrack1 = this.sound.add('soundtrack1', { loop: true, volume: 0.2 });
         this.soundtrack1.play();
         this.cameras.main.fadeIn(1000);
 
@@ -56,14 +56,13 @@ class menuInicial extends Phaser.Scene {
         ).setDepth(2);
 
 
-        this.add.image(260, 160, 'logo').setScale(0.6)
+        this.add.image(640, 200, 'logo').setScale(0.8)
 
-        botaoIniciar = this.add.image(200, 320, 'iniciar').setScale(0.5).setInteractive({ useHandCursor: true }).setDepth(10);
-        botaoOpcoes = this.add.image(200, 420, 'opcoes').setScale(0.5).setInteractive({ useHandCursor: true }).setDepth(10);
-        botaoCreditos = this.add.image(200, 520, 'creditos').setScale(0.5).setInteractive({ useHandCursor: true }).setDepth(10);
+        botaoIniciar = this.add.image(640, 400, 'iniciar').setScale(0.5).setInteractive({ useHandCursor: true }).setDepth(10);
 
 
-        let botoes = [botaoIniciar, botaoCreditos, botaoOpcoes]
+
+        let botoes = [botaoIniciar]
 
         botoes.forEach((botao) => {
             botao.on('pointerover', () => {
@@ -91,9 +90,7 @@ class menuInicial extends Phaser.Scene {
                         delay: 1000, // Tempo em milissegundos (2 segundos)
                         callback: () => {
                             this.soundtrack1.stop();
-                                this.radio = this.sound.add('radio', { loop: true, volume: 1 });
-                                this.radio.play();
-                            this.scene.start('FasePrincipal'); // Inicia a tela de configuração
+                            this.scene.start('Cutscene'); // Inicia a tela de configuração
                         }
                     })
                 });
