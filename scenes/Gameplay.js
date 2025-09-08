@@ -76,7 +76,7 @@ class FasePrincipal extends Phaser.Scene {
 
     this.lights.addLight(400, 300, 200).setColor(0xffffff).setIntensity(2);
     // Pontuação
-    this.pontos = { j1: 6, j2: 6 };
+    this.pontos = { j1: 0, j2: 0 };
     this.perso1 = this.add.image(70, 50, 'P1').setScale(0.45)
     this.perso2 = this.add.image(1090, 50, 'P2').setScale(0.45)
 
@@ -183,9 +183,6 @@ class FasePrincipal extends Phaser.Scene {
         }
       });
     } else {
-      // Aplica cor sorteada ao carro comum
-      carro.setTint(corSorteada);
-      // Destruir quando sair da tela
       carro.once('update', () => {
         if (carro.x < -50) carro.destroy();
       });
